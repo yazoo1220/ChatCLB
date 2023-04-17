@@ -17,10 +17,15 @@ from langchain.vectorstores import Chroma
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.document_loaders import PyMuPDFLoader
 
-pdf = st.file_uploader("Upload a PDF file", type="pdf")
+uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
+if uploaded_file is not None:
+    with tempfile.TemporaryDirectory() as tmpdir:
+        with open(f"{tmpdir}/{uploaded_file.name}", "wb") as f:
+            f.write(uploaded_file.getbuffer())
+        file_url = f"{tmpdir}/{uploaded_file.name}"
 
 if pdf:
-    loader = PyMuPDFLoader(pdf)
+    loader = PyMuPDFLoader(file_url)
     documents = loader.load()
     text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
     texts = text_splitter.split_documents(documents)
