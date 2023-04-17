@@ -32,7 +32,7 @@ else:
     
     
 def get_text():
-    input_text = st.text_input("You: ", "この動画の要点を3つまとめてください。回答は日本語でお願いします。", key="input")
+    input_text = st.text_input("You: ", "how can I optimise the schedule?", key="input")
     return input_text
 
 
