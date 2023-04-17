@@ -22,6 +22,7 @@ from langchain.vectorstores import Pinecone
 import pinecone 
 
 # initialize pinecone
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 pinecone.init(
     api_key=PINECONE_API_KEY,  # find at app.pinecone.io
     environment="us-east1-gcp"  # next to api key in console
