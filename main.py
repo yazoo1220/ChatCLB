@@ -19,6 +19,13 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains import ConversationalRetrievalChain
 from langchain.vectorstores import Pinecone
 
+import pinecone 
+
+# initialize pinecone
+pinecone.init(
+    api_key=PINECONE_API_KEY,  # find at app.pinecone.io
+    environment="us-east1-gcp"  # next to api key in console
+)
 
 def get_chat_history(inputs) -> str:
     res = []
