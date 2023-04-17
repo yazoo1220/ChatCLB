@@ -24,7 +24,7 @@ if uploaded_file is not None:
             f.write(uploaded_file.getbuffer())
         file_url = f"{tmpdir}/{uploaded_file.name}"
 
-if pdf:
+if file_url:
     loader = PyMuPDFLoader(file_url)
     documents = loader.load()
     text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
