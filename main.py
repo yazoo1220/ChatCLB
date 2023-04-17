@@ -2,6 +2,7 @@
 import streamlit as st
 from streamlit_chat import message
 import os
+import tempfile
 
 st.set_page_config(page_title="ChatTube", page_icon=":robot:")
 st.header("▶️ ChatCLB")
