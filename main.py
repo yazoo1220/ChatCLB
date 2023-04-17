@@ -31,7 +31,7 @@ llm = OpenAI(streaming=True, callback_manager=CallbackManager([StreamingStdOutCa
 embeddings = OpenAIEmbeddings()
 db = Pinecone.from_existing_index(embedding=embeddings,index_name="test")
 retriever = db.as_retriever(search_kwargs={"k": 1})
-chain = ConversationalRetrievalChain.from_llm(llm=llm, retriever=retriever,get_chat_history=get_chat_history)
+qa = ConversationalRetrievalChain.from_llm(llm=llm, retriever=retriever,get_chat_history=get_chat_history)
     
     
 def get_text():
