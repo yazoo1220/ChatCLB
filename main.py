@@ -18,6 +18,7 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.document_loaders import PyMuPDFLoader
 
 uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
+file_url = ''
 if uploaded_file is not None:
     with tempfile.TemporaryDirectory() as tmpdir:
         with open(f"{tmpdir}/{uploaded_file.name}", "wb") as f:
