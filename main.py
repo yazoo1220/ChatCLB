@@ -24,6 +24,8 @@ if uploaded_file is not None:
         with open(f"{tmpdir}/{uploaded_file.name}", "wb") as f:
             f.write(uploaded_file.getbuffer())
         file_url = f"{tmpdir}/{uploaded_file.name}"
+else:
+    pass
 
 if file_url:
     loader = PyMuPDFLoader(file_url)
