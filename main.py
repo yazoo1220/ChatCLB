@@ -14,13 +14,14 @@ if "past" not in st.session_state:
 
 
 from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.chains import ConversationalRetrievalChain
+from langchain.vectorstores import Pinecone
 
-if file_url:
-    embeddings = OpenAIEmbeddings()
-    docsearch = Pinecone.from_existing_index(embeddings, index_name="langchain-demo")
-    qa = RetrievalQA.from_chain_type(llm=OpenAI(), chain_type="stuff", retriever=docsearch.as_retriever(search_kwargs={"k": 1})) 
-else:
-    pass
+llm = OpenAI(streaming=True, callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]), verbose=True, temperature=0)
+embeddings = OpenAIEmbeddings()
+db = Pinecone.from_existing_index(embeddings, index_name="langchain-demo")
+retriever = db.as_retriever(search_kwargs={"k": 1})
+chain = ConversationalRetrievalChain.from_llm(llm=llm, retriever=retriever,get_chat_history=get_chat_history)
     
     
 def get_text():
@@ -29,27 +30,13 @@ def get_text():
 
 
 user_input = get_text()
-load_button = st.button('ask')
+ask_button = st.button('ask')
 
-from langchain.document_loaders import YoutubeLoader
-index = ""
-if load_button:
-    try:
-        pass
-    except Exception as e:
-        st.write("error loading the video: "+ str(e))
-else:
-    st.write("Please ask me anything about Calabrio ;)")
-
-
-if index == "":
-    pass
-else:
-    with st.spinner('typing...'):
-        output = qa.run(user_input)
-        st.session_state.past.append(user_input)
-        st.session_state.generated.append(output.response)
-
+if ask_button:
+    chat_history = []
+    result = qa({"question": user_input, "chat_history": chat_history})
+    st.session_state.past.append(user_input)
+    st.session_state.generated.append(result['answer'])
 
 if st.session_state["generated"]:
 
