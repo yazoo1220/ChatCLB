@@ -26,7 +26,7 @@ else:
 
 if os.environ['OPENAI_API_KEY']!="":
     try:
-        chain = load_chain()
+        pass
     except Exception as e:
         st.write("error loading data: " + str(e))
 else:
