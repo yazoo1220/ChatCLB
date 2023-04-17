@@ -29,7 +29,7 @@ def get_chat_history(inputs) -> str:
 
 llm = OpenAI(streaming=True, callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]), verbose=True, temperature=0)
 embeddings = OpenAIEmbeddings()
-db = Pinecone.from_existing_index(embedding=embeddings,index_name="test-0a270f9.svc.us-east1-gcp.pinecone.io")
+db = Pinecone.from_existing_index(index_name="test",embedding=embeddings)
 retriever = db.as_retriever(search_kwargs={"k": 1})
 qa = ConversationalRetrievalChain.from_llm(llm=llm, retriever=retriever,get_chat_history=get_chat_history)
     
