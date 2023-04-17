@@ -20,7 +20,7 @@ from langchain.document_loaders import PyMuPDFLoader
 pdf = st.file_uploader("Upload a PDF file", type="pdf")
 
 if pdf:
-    loader = PyMuPDFLoader("./merged.pdf")
+    loader = PyMuPDFLoader(pdf)
     documents = loader.load()
     text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
     texts = text_splitter.split_documents(documents)
