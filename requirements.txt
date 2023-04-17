@@ -1,5 +1,5 @@
 langchain
-chromadb
+pinecone-client
 unstructured
 tiktoken
 pymupdf
