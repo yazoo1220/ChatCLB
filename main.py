@@ -33,7 +33,7 @@ def create_qa():
     db = Pinecone.from_existing_index(index_name=index_name,embedding=embeddings)
     retriever = db.as_retriever(search_kwargs={"k": 1})
     qa = ConversationalRetrievalChain.from_llm(llm=llm, retriever=retriever,get_chat_history=get_chat_history)
-  
+    return qa
 qa = create_qa()
     
 def get_text():
