@@ -53,7 +53,7 @@ if load_button:
     except Exception as e:
         st.write("error loading the video: "+ str(e))
 else:
-    st.write("waiting for Youtube video to be loaded")
+    st.write("Please ask me anything about Calabrio ;)")
 
 
 if index == "":
