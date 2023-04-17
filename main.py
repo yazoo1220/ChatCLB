@@ -21,7 +21,7 @@ from langchain.vectorstores import Pinecone
 
 llm = OpenAI(streaming=True, callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]), verbose=True, temperature=0)
 embeddings = OpenAIEmbeddings()
-db = Pinecone.from_existing_index(embeddings, index_name="langchain-demo")
+db = Pinecone.from_existing_index(embeddings, index_name="langchain-demo-0a270f9.svc.us-east1-gcp.pinecone.io")
 retriever = db.as_retriever(search_kwargs={"k": 1})
 chain = ConversationalRetrievalChain.from_llm(llm=llm, retriever=retriever,get_chat_history=get_chat_history)
     
