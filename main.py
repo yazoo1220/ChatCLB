@@ -19,6 +19,14 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains import ConversationalRetrievalChain
 from langchain.vectorstores import Pinecone
 
+
+def get_chat_history(inputs) -> str:
+    res = []
+    for human, ai in inputs:
+        res.append(f"Human:{human}\nAI:{ai}")
+    return "\n".join(res)
+
+
 llm = OpenAI(streaming=True, callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]), verbose=True, temperature=0)
 embeddings = OpenAIEmbeddings()
 db = Pinecone.from_existing_index(embedding=embeddings,index_name="test")
