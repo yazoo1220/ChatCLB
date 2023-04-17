@@ -29,7 +29,8 @@ def get_chat_history(inputs) -> str:
 def create_qa():
     llm = OpenAI(streaming=True, callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]), verbose=True, temperature=0)
     embeddings = OpenAIEmbeddings()
-    db = Pinecone.from_existing_index(index_name=PINECONE_INDEX_NAME,embedding=embeddings)
+    index_name = os.getenv("PINECONE_INDEX_NAME")
+    db = Pinecone.from_existing_index(index_name=index_name,embedding=embeddings)
     retriever = db.as_retriever(search_kwargs={"k": 1})
     qa = ConversationalRetrievalChain.from_llm(llm=llm, retriever=retriever,get_chat_history=get_chat_history)
   
