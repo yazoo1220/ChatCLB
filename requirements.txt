@@ -5,3 +5,4 @@ tiktoken
 pymupdf
 streamlit_chat
 streamlit
+google-cloud-storage
