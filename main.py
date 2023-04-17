@@ -46,9 +46,8 @@ ask_button = st.button('ask')
 
 if ask_button:
     chat_history = []
-    result = qa({"question": user_input, "chat_history": chat_history})
     st.session_state.past.append(user_input)
-    st.session_state.generated.append(result['answer'])
+    st.session_state.generated.append(qa({"question": user_input, "chat_history": chat_history}))
 
 if st.session_state["generated"]:
 
