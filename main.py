@@ -23,6 +23,7 @@ import pinecone
 
 # initialize pinecone
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+st.write(PINECONE_API_KEY)
 pinecone.init(
     api_key=PINECONE_API_KEY,  # find at app.pinecone.io
     environment="us-east1-gcp"  # next to api key in console
@@ -37,8 +38,8 @@ def get_chat_history(inputs) -> str:
 def create_qa():
     llm = OpenAI(streaming=True, callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]), verbose=True, temperature=0)
     embeddings = OpenAIEmbeddings()
-    index_name = os.getenv("PINECONE_INDEX_NAME")
-    db = Pinecone.from_existing_index(index_name=index_name,embedding=embeddings)
+#     index_name = os.getenv("PINECONE_INDEX_NAME")
+    db = Pinecone.from_existing_index(index_name='calabrio',embedding=embeddings)
     retriever = db.as_retriever(search_kwargs={"k": 1})
     qa = ConversationalRetrievalChain.from_llm(llm=llm, retriever=retriever,get_chat_history=get_chat_history)
     return qa
