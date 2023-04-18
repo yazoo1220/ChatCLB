@@ -5,7 +5,7 @@ import os
 import tempfile
 
 st.set_page_config(page_title="ChatTube", page_icon=":robot:")
-st.header("▶️ ChatCLB")
+st.header("🗓️ ChatCLB")
 if "generated" not in st.session_state:
     st.session_state["generated"] = []
     
@@ -48,7 +48,7 @@ def create_qa():
 qa = create_qa()
     
 def get_text():
-    input_text = st.text_input("You: ", "how can I optimise the schedule?", key="input")
+    input_text = st.text_input("💬 You: ", "how can I optimise the schedule?", key="input")
     return input_text
 
 
