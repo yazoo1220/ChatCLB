@@ -4,7 +4,7 @@ from streamlit_chat import message
 import os
 import tempfile
 
-st.set_page_config(page_title="ChatTube", page_icon=":robot:")
+st.set_page_config(page_title="ChatCLB", page_icon=":robot:")
 st.header("🗓️ ChatCLB")
 if "generated" not in st.session_state:
     st.session_state["generated"] = []
