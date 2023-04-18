@@ -8,6 +8,9 @@ st.set_page_config(page_title="ChatTube", page_icon=":robot:")
 st.header("▶️ ChatCLB")
 if "generated" not in st.session_state:
     st.session_state["generated"] = []
+    
+st.write("NB!:this is currently beta version and only knows about 'schedulers' part of Calabrio.")
+st.write("https://help.calabrio.com/doc/Content/web/roles-scheduler.htm")
 
 if "past" not in st.session_state:
     st.session_state["past"] = []
