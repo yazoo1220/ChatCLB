@@ -21,6 +21,7 @@ from langchain.callbacks.base import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains import ConversationalRetrievalChain
+from langchain.memory import ConversationBufferWindowMemory
 from langchain.vectorstores import Pinecone
 
 import pinecone 
@@ -48,7 +49,7 @@ def create_qa():
 #     index_name = os.getenv("PINECONE_INDEX_NAME")
     db = Pinecone.from_existing_index(index_name='calabrio',embedding=embeddings)
     retriever = db.as_retriever(search_kwargs={"k": 1})
-    qa = ConversationalRetrievalChain.from_llm(llm=llm, retriever=retriever,get_chat_history=get_chat_history)
+    qa = ConversationalRetrievalChain.from_llm(llm=llm, retriever=retriever,get_chat_history=get_chat_history,memory=ConversationBufferWindowMemory(k=10))
     return qa
 qa = create_qa()
     
