@@ -15,7 +15,7 @@ st.write("https://help.calabrio.com/doc/Content/web/roles-scheduler.htm")
 if "past" not in st.session_state:
     st.session_state["past"] = []
 
-from langchain.llms import OpenAI
+from langchain.chat_models import ChatOpenAI
 from langchain.callbacks.base import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.embeddings.openai import OpenAIEmbeddings
@@ -38,7 +38,7 @@ def get_chat_history(inputs) -> str:
     return "\n".join(res)
 @st.cache_resource
 def create_qa():
-    llm = OpenAI(streaming=True, callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]), verbose=True, temperature=0)
+    llm = ChatOpenAI(temperature=0.9, model_name='gpt-3.5-turbo', streaming=True, callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]), verbose=True)
     embeddings = OpenAIEmbeddings()
 #     index_name = os.getenv("PINECONE_INDEX_NAME")
     db = Pinecone.from_existing_index(index_name='calabrio',embedding=embeddings)
