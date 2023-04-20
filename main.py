@@ -21,7 +21,7 @@ from langchain.callbacks.base import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains import ConversationalRetrievalChain
-from langchain.memory import ConversationBufferWindowMemory
+# from langchain.memory import ConversationBufferWindowMemory
 from langchain.vectorstores import Pinecone
 
 import pinecone 
