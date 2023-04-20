@@ -44,7 +44,7 @@ def create_qa():
         model = "gpt-4"
     else:
         model = "gpt-3.5-turbo"
-    llm = ChatOpenAI(temperature=0.9, model_name=model, streaming=True)# , callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]), verbose=True)
+    llm = ChatOpenAI(temperature=0.9, model_name=model, streaming=True, callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]), verbose=True)
     embeddings = OpenAIEmbeddings()
 #     index_name = os.getenv("PINECONE_INDEX_NAME")
     db = Pinecone.from_existing_index(index_name='calabrio',embedding=embeddings)
